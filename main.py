@@ -56,8 +56,6 @@ if __name__ == "__main__":
     test_file = "/home/yangyangwei/LLM/command/data/data.json" 
     data_loader = DataLoader(test_file)
     events = data_loader.load_events()
-    for event in events:
-        print(event)
 
     anomaly_detector = AnomalyDetector()
     anomaly_detector.load_permission_manager()  
