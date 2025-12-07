@@ -1,30 +1,27 @@
 # MAScope
 
-MAScope 是一个多智能体安全防护系统，旨在对多个智能体之间的协作与交互访问控制，以保证系统安全运行。
+MAScope is a multi-agent security protection system designed to control collaboration and interactive access among multiple agents, ensuring the secure operation of the system.
 
-## 项目介绍
+## Project Introduction
 
-MAScope： 基于动态标签的流动的访问控制......
+MAScope: Flow-based access control based on dynamic Tags...
 
-## 目录结构
+## Directory Structure
 
-以下是项目的目录结构说明：
+Below is an explanation of the project directory structure:
 
 ```text
 MAScope/
-├── agents/             # 智能体定义与实现
 ```
 
-## 快速开始
+## Quick Start
 
-1. **安装依赖**
+1. **Install dependencies**
    ```bash
    pip install -r requirements.txt
    ```
 
-2. **运行项目**
+2. **Run the project**
    ```bash
    python main.py
    ```
-
-```
