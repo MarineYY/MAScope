@@ -100,6 +100,7 @@ class AnomalyDetector:
 
         sink_tag = self.get_tag_cache(associated_event.sink_node)
         if sink_tag.should_trigger_alert():
+            self.remove_tag_cache(associated_event.sink_node)
             return sink_tag 
         else:
             return None
