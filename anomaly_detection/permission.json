@@ -1,7 +1,6 @@
 {
-    "/home/yangyangwei/LLM/command/env_data/config_1.json": 2,
     "UserAgent": 2,
     "AssistantAgent": 2,
-    "CodeAgent": 2,
-    "ExecutorAgent": 2
+    "CodeAgent": 1,
+    "ExecutorAgent": 1
 }

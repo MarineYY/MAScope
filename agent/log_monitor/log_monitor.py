@@ -48,4 +48,4 @@ class logMonitor(logging.Logger):
        
         self.info(json.dumps(log_entry, ensure_ascii=False))
 
-log_monitor = logMonitor(name=EVENT_LOGGER_NAME, log_file="/home/yangyangwei/LLM/command/data/data.json")
+log_monitor = logMonitor(name=EVENT_LOGGER_NAME, log_file="/home/yangyangwei/LLM/MAScope/data/data.json")

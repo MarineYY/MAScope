@@ -36,6 +36,9 @@ class AgentNode(BasicNode):
 
     def get_node_permission(self):
         return self.Permission
+    
+    def set_node_permission(self, permission):
+        self.Permission = permission
 
 @dataclass
 class DataNode(BasicNode):
@@ -65,6 +68,9 @@ class DataNode(BasicNode):
     def get_node_permission(self):
         return self.Permission
 
+    def set_node_permission(self, permission):
+        self.Permission = permission
+
 @dataclass
 class CodeNode(BasicNode):
     node_uuid: Optional[str] = None
@@ -92,3 +98,6 @@ class CodeNode(BasicNode):
 
     def get_node_permission(self):
         return self.Permission
+
+    def set_node_permission(self, permission):
+        self.Permission = permission

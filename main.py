@@ -53,7 +53,7 @@ class DataLoader:
 
     
 if __name__ == "__main__":
-    test_file = "/home/yangyangwei/LLM/command/data/data.json" 
+    test_file = "/home/yangyangwei/LLM/MAScope/data/data.json" 
     data_loader = DataLoader(test_file)
     events = data_loader.load_events()
 

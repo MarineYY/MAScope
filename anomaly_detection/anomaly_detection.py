@@ -30,12 +30,6 @@ class AnomalyDetector:
 
         # 更新上次打印时间
         self.last_print_time = time.time() 
-        print('=' * 50)
-        print(f"Processing Event Count: {self.processed_event_count_value}")
-        print(f"Event Details: {associated_event}")
-        print(f"The number of Cached Tags: {len(self.tags_cache_map)}")
-        print(f"Initialized Tags: {AnomalyDetector.init_tag_count}")
-        print(f"Propagated Tags: {AnomalyDetector.propogation_tag_count}")
 
         try:
             if self.is_node_tag_cached(associated_event.source_node):
@@ -47,6 +41,14 @@ class AnomalyDetector:
         except Exception as e:
             print(f"[AnomalyDetector] 错误: {e}")
             return
+        
+        print(f"Processing Event Count: {self.processed_event_count_value}")
+        print(f"Event Details: {associated_event}")
+        print(f"The number of Cached Tags: {len(self.tags_cache_map)}")
+        print(f"Initialized Tags: {AnomalyDetector.init_tag_count}")
+        print(f"Propagated Tags: {AnomalyDetector.propogation_tag_count}")
+        print('=' * 100)
+        print('\n')
 
         if tag is not None:
             alert_json_string = self.alert_generation(tag)
@@ -75,7 +77,11 @@ class AnomalyDetector:
             return
         else:
             source_tag = self.get_tag_cache(associated_event.source_node)
-            prompt = associated_event.get_subject_context()
+            prompt = f"""
+                    事件类型：{associated_event.get_relationship()} 
+                    提示词命令：{associated_event.get_subject_context()}
+                    """
+            # print(f"Prompt: {prompt}")
             ner_result = self.ner_agent.NER_identifcation(prompt)
             print(ner_result)
             print('-'* 50)
@@ -99,7 +105,7 @@ class AnomalyDetector:
             return None
 
         sink_tag = self.get_tag_cache(associated_event.sink_node)
-        if sink_tag.should_trigger_alert():
+        if sink_tag.should_trigger_alert(associated_event):
             self.remove_tag_cache(associated_event.sink_node)
             return sink_tag 
         else:

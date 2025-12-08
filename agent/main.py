@@ -29,7 +29,7 @@ async def main():
     router.agents["ExecutorAgent"] = executor_agent
 
     # 测试输入
-    file_name = "/home/yangyangwei/LLM/command/data/exe_evil.json"
+    file_name = "/home/yangyangwei/LLM/MAScope/data/exe_evil.json"
     with open(file_name, "r", encoding="utf-8") as f:
         data = f.read()
         data = json.loads(data)

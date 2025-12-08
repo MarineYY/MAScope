@@ -75,8 +75,14 @@ class AssociatedEvent:
     def get_subject_node_Permisson(self):
         return self.source_node.get_node_permission()
     
+    def set_subject_node_Permisson(self, permission):
+        self.source_node.set_node_permission(permission)
+    
     def get_object_node_Permisson(self):
         return self.sink_node.get_node_permission()
+    
+    def set_object_node_Permisson(self, permission):
+        self.sink_node.set_node_permission(permission)
 
     def set_subject_context(self, context):
         self.subject_context = context
