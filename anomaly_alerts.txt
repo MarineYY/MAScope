@@ -2,6 +2,6 @@
 currentTime:1765162786479
 AlertPath:
 Event: [f6815990-1c39-52c5-ba00-cb1684f14cb0 UserAgent 2] -> agent_interaction -> [5481d629-0f0f-51b2-84f9-7e88c26eea60 CodeAgent 1], ts:1765162782220
-Event: [5481d629-0f0f-51b2-84f9-7e88c26eea60 CodeAgent 1] -> agent_interaction -> [bfb27a8b-0e6e-5665-834a-5d94c717ac0e ExecutorAgent {'minimum': 0, 'maximum': 0}], ts:1765162786479
+Event: [5481d629-0f0f-51b2-84f9-7e88c26eea60 CodeAgent 1] -> agent_interaction -> [bfb27a8b-0e6e-5665-834a-5d94c717ac0e ExecutorAgent 2], ts:1765162786479
 AlertType: UntrustedCodeExecution
 

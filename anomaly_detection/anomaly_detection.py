@@ -3,6 +3,7 @@ from typing import Optional
 from anomaly_detection.anomaly_tag_cache import AnomalyTagCache
 from provenance_graph.associated_event import AssociatedEvent
 from anomaly_detection.ner_agent import NERAgent
+from provenance_graph.event_type_config import LOG_TYPE
 import time
 import json
 
@@ -77,12 +78,13 @@ class AnomalyDetector:
             return
         else:
             source_tag = self.get_tag_cache(associated_event.source_node)
-            prompt = f"""
-                    事件类型：{associated_event.get_relationship()} 
-                    提示词命令：{associated_event.get_subject_context()}
-                    """
-            # print(f"Prompt: {prompt}")
-            ner_result = self.ner_agent.NER_identifcation(prompt)
+            if associated_event.get_relationship() in LOG_TYPE.Agent_OP:
+                prompt = f"""
+                        事件类型：{associated_event.get_relationship()} 
+                        提示词命令：{associated_event.get_subject_context()}
+                        """
+                # print(f"Prompt: {prompt}")
+                ner_result = self.ner_agent.NER_identifcation(prompt)
             print(ner_result)
             print('-'* 50)
             new_tag = source_tag.propagate(associated_event, ner_result, self.permission_manager)
