@@ -1,6 +1,7 @@
 {
     "UserAgent": 2,
     "AssistantAgent": 2,
-    "CodeAgent": 1,
-    "ExecutorAgent": 1
+    "CodeAgent": 2,
+    "ExecutorAgent": 2,
+    "WebAgent": 2
 }

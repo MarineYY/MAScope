@@ -8,7 +8,6 @@ import time
 import json
 
 class AnomalyDetector:
-
     init_tag_count = 0
     propogation_tag_count = 0
 
@@ -83,10 +82,13 @@ class AnomalyDetector:
                         事件类型：{associated_event.get_relationship()} 
                         提示词命令：{associated_event.get_subject_context()}
                         """
-                # print(f"Prompt: {prompt}")
+
                 ner_result = self.ner_agent.NER_identifcation(prompt)
-            print(ner_result)
-            print('-'* 50)
+                print(ner_result)
+                print('-'* 50)
+            else:
+                ner_result = "{}"
+
             new_tag = source_tag.propagate(associated_event, ner_result, self.permission_manager)
             
             AnomalyDetector.propogation_tag_count += 1

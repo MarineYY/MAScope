@@ -4,7 +4,7 @@ import json
 from provenance_graph.event_type_config import LOG_TYPE
 
 class AnomalyTagCache:
-    MAX_PROPAGATION_DISTANCE = 5
+    MAX_PROPAGATION_DISTANCE = 15
 
     def __init__(self, event=None):
         self.uuid = uuid.uuid4() 
