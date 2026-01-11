@@ -141,7 +141,7 @@ def convert_json_to_standard_format(log):
 if __name__ == '__main__':
 
     set_dict = set()
-    benign_log_list = ['attack_data/provenance.jsonl']
+    benign_log_list = ['provenance.jsonl']
     for index, file_path in enumerate(benign_log_list):
         print('Now processing file is ', file_path)
         if os.path.isfile(file_path): 
@@ -157,7 +157,7 @@ if __name__ == '__main__':
                         print('Unknown log type: ', data['logType'])
                         continue
 
-            preparation_log_path = os.path.join(file_path.rsplit('/', 1)[0], f'attack.json')
+            preparation_log_path = 'attack.jsonl'
 
             with open(preparation_log_path, 'w') as f:
                 for log in preparation_logs:

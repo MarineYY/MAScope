@@ -1,5 +1,4 @@
 import json
-from multiprocessing import context
 import uuid
 from dataclasses import dataclass, field
 from typing import Optional
@@ -9,15 +8,14 @@ class AssociatedEvent:
     def __init__(self, source_node=None, sink_node=None, relationship=None, time_stamp=None):
         self.source_node_tag = None
         self.sink_node_tag = None
-        self.source_node = source_node  # subject
-        self.sink_node = sink_node  # object
+        self.source_node = source_node  
+        self.sink_node = sink_node 
         self.relationship = relationship
-        self.attack_id = None
         self.event_uuid = None
+        self.subject_context = ""
+        self.object_context = ""
         self.timestamp = time_stamp
         self.generalized_event = None
-        self.subject_context = None
-        self.object_context = None
 
     def copy_generalize(self):
         if self.generalized_event is not None:
@@ -33,9 +31,6 @@ class AssociatedEvent:
 
     def get_relationship(self):
         return self.relationship
-
-    def get_attack_id(self):
-        return self.attack_id
 
     def get_event_uuid(self):
         return self.event_uuid
@@ -61,9 +56,6 @@ class AssociatedEvent:
     def set_timestamp(self, timestamp):
         self.timestamp = timestamp
 
-    def set_attack_id(self, attack_id):
-        self.attack_id = attack_id
-
     def set_event_uuid(self, event_uuid):
         self.event_uuid = event_uuid
 
@@ -74,22 +66,10 @@ class AssociatedEvent:
         return self.sink_node.get_node_name()
 
     def __str__(self):
-        return f"Event: [{self.source_node}] -> {self.relationship} -> [{self.sink_node}], ts:{self.timestamp}"
+        return f"{self.source_node} -> {self.relationship} -> {self.sink_node}, ts:{self.timestamp}"
     
     def preprocess_event(self):
         return f"{self.source_node.get_node_name()}, {self.relationship}, {self.sink_node.get_node_name()}"
-    
-    def get_subject_node_Permisson(self):
-        return self.source_node.get_node_permission()
-    
-    def set_subject_node_Permisson(self, permission):
-        self.source_node.set_node_permission(permission)
-    
-    def get_object_node_Permisson(self):
-        return self.sink_node.get_node_permission()
-    
-    def set_object_node_Permisson(self, permission):
-        self.sink_node.set_node_permission(permission)
 
     def set_subject_context(self, context):
         self.subject_context = context
@@ -99,4 +79,7 @@ class AssociatedEvent:
 
     def set_object_context(self, context):
         self.object_context = context
+    
+    def get_object_context(self):
+        return self.object_context
     
