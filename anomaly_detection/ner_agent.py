@@ -63,7 +63,7 @@ class NERAgent:
             **输入**
         """
 
-    def NER_identifcation(self, content):
+    def NER_identification(self, content):
         try:
             prompt = f"{self.system_prompt}\n{content}"
             attempts = 3
