@@ -1,5 +1,5 @@
 class LOG_TYPE:
-        AGENT_OP = ['agent_invoke', 'agent_respond']
+        AGENT_OP = ['agent_invoke', 'agent_respond','tool_invoke', 'tool_respond']
         FILE_OP = ['file_read', 'file_write', 'file_delete', 'file_modify', 'process_load']
         PROCESS_OP = ['process_start', 'process_end']
         NET_OP = ['network_send', 'network_receive']

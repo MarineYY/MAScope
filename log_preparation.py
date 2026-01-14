@@ -21,6 +21,8 @@ class PreparationLog:
 
     def to_dict(self) -> Dict[str, str]:
         return {
+            'source': "system",
+            'attack_id': '',
             'host_uuid': self.host_uuid,
             'event_uuid': self.event_uuid,
             'event_timestamp': self.event_timestamp,
@@ -61,11 +63,6 @@ socket_dict = dict()
 node_count = 0  
 
 def get_uuid(name):
-    """
-    get uuid value of String name
-    :param s:
-    :return:
-    """
     return str(uuid.uuid5(uuid.NAMESPACE_DNS, name))
 
 def save_node(log:json)->None:
@@ -113,23 +110,22 @@ def convert_json_to_standard_format(log):
         if event_type == 'file_modify':
             object_uuid = log['logData']['d2']
         object_name = file_dict.get(object_uuid)
-
-        preparation_log = PreparationLog(host_uuid, event_uuid, event_type, event_timestamp, subject_uuid, subject_name, object_uuid, object_name, "", "")
+        preparation_log = PreparationLog(host_uuid, event_uuid, event_type, event_timestamp, get_uuid(subject_name), subject_name, get_uuid(object_name), object_name, "", "")
 
     elif event_type in LOG_TYPE.PROCESS_OP:
         subject_name = process_dict.get(subject_uuid)
         object_name = file_dict.get(object_uuid)
 
-        preparation_log = PreparationLog(host_uuid, event_uuid, event_type, event_timestamp, subject_uuid, subject_name, object_uuid, object_name, "", "")
+        preparation_log = PreparationLog(host_uuid, event_uuid, event_type, event_timestamp, get_uuid(subject_name), subject_name, get_uuid(object_name), object_name, "", "")
 
     elif event_type in LOG_TYPE.NET_OP:
         subject_name = process_dict.get(subject_uuid)
         object_name = socket_dict.get(object_uuid)
 
-        preparation_log = PreparationLog(host_uuid, event_uuid, 'network_send', event_timestamp, subject_uuid, subject_name, object_uuid, object_name, "", "")
+        preparation_log = PreparationLog(host_uuid, event_uuid, 'network_send', event_timestamp, get_uuid(subject_name), subject_name, get_uuid(object_name), object_name, "", "")
         preparation_logs.append(preparation_log.to_json())
 
-        preparation_log = PreparationLog(host_uuid, event_uuid, 'network_receive', event_timestamp, subject_uuid, subject_name, object_uuid, object_name, "", "")
+        preparation_log = PreparationLog(host_uuid, event_uuid, 'network_receive', event_timestamp, get_uuid(subject_name), subject_name, get_uuid(object_name), object_name, "", "")
 
     else:
         print('Unknown event type: ', log, event_type)
@@ -138,10 +134,51 @@ def convert_json_to_standard_format(log):
     preparation_logs.append(preparation_log.to_json())
     return preparation_log.to_json()
 
+def merge_and_filter_logs(agent_trace_path, attack_path, output_path):
+    agent_logs = []
+    attack_logs = []
+
+    if os.path.exists(agent_trace_path):
+        with open(agent_trace_path, 'r', encoding='utf-8') as f:
+            for line in f:
+                if line.strip():
+                    agent_logs.append(json.loads(line))
+    
+    if not agent_logs:
+        print("Error: agent_trace.jsonl 为空或不存在")
+        return
+
+    start_ts = int(agent_logs[0]['event_timestamp'])
+    end_ts = int(agent_logs[-1]['event_timestamp'])
+
+    print(f"时间戳过滤范围: {start_ts} 至 {end_ts}")
+
+    if os.path.exists(attack_path):
+        with open(attack_path, 'r', encoding='utf-8') as f:
+            for line in f:
+                if line.strip():
+                    attack_logs.append(json.loads(line))
+
+    combined_logs = agent_logs + attack_logs
+    
+    filtered_logs = [
+        log for log in combined_logs 
+        if start_ts <= int(log['event_timestamp']) <= end_ts
+    ]
+
+    filtered_logs.sort(key=lambda x: int(x['event_timestamp']))
+
+    with open(output_path, 'w', encoding='utf-8') as f:
+        for log in filtered_logs:
+            f.write(json.dumps(log) + '\n')
+
+    print(f"✅ 合并完成！共保留 {len(filtered_logs)} 条记录。")
+    print(f"结果已保存至: {output_path}")
+
 if __name__ == '__main__':
 
     set_dict = set()
-    benign_log_list = ['attack_data/provenance.jsonl']
+    benign_log_list = ['SigmaGen-parse\MAScope_data\provenance.jsonl']
     for index, file_path in enumerate(benign_log_list):
         print('Now processing file is ', file_path)
         if os.path.isfile(file_path): 
@@ -157,7 +194,7 @@ if __name__ == '__main__':
                         print('Unknown log type: ', data['logType'])
                         continue
 
-            preparation_log_path = os.path.join(file_path.rsplit('/', 1)[0], f'attack.json')
+            preparation_log_path = 'logs.jsonl'
 
             with open(preparation_log_path, 'w') as f:
                 for log in preparation_logs:
@@ -169,3 +206,11 @@ if __name__ == '__main__':
             socket_dict = dict()
 
     print('Total number of nodes: ', node_count)
+
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    
+    agent_trace_file = os.path.join(current_dir, 'logs\\agent_trace.jsonl')
+    attack_file = os.path.join(current_dir, 'logs.jsonl')
+    merged_file = os.path.join(current_dir, 'merged_provenance.jsonl')
+
+    merge_and_filter_logs(agent_trace_file, attack_file, merged_file)
