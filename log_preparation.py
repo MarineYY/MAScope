@@ -69,7 +69,13 @@ def save_node(log:json)->None:
     if log["logData"]["type"] == "OBJECT_FILE":
         file_dict[log["logData"]["id"]] = log["logData"]["path"]
     elif log["logData"]["type"] == "SUBJECT_PROCESS":
-        process_dict[log["logData"]["id"]] = log["logData"]["processName"]
+        process_dict[log["logData"]["id"]] = {
+            "processName": log["logData"]["processName"],
+            "pid": log["logData"]["pid"],
+            "ppid": log["logData"]["ppid"],
+            "cmdLine": log["logData"]["cmdLine"],
+            "owner": log["logData"].get("owner", "")
+        }
     elif log["logData"]["type"] == "OBJECT_NETFLOW":
         socket_dict[log["logData"]["id"]] = log["logData"]["dip"] + ':' + str(log["logData"]["dport"])
     else:
@@ -104,22 +110,31 @@ def convert_json_to_standard_format(log):
     if subject_uuid is None:
         return None, None
     object_uuid = log['logData']['d']
+    
+    # 获取subject信息
+    subject_info = process_dict.get(subject_uuid)
+    if subject_info:
+        subject_name_raw = subject_info.get("processName", "")
+        subject_pid = subject_info.get("pid", "")
+    else:
+        subject_name_raw = ""
+        subject_pid = ""
 
     if event_type in LOG_TYPE.FILE_OP:
-        subject_name = process_dict.get(subject_uuid)
+        subject_name = f"{subject_name_raw}_{subject_pid}"
         if event_type == 'file_modify':
             object_uuid = log['logData']['d2']
         object_name = file_dict.get(object_uuid)
         preparation_log = PreparationLog(host_uuid, event_uuid, event_type, event_timestamp, get_uuid(subject_name), subject_name, get_uuid(object_name), object_name, "", "")
 
     elif event_type in LOG_TYPE.PROCESS_OP:
-        subject_name = process_dict.get(subject_uuid)
+        subject_name = f"{subject_name_raw}_{subject_pid}"
         object_name = file_dict.get(object_uuid)
 
         preparation_log = PreparationLog(host_uuid, event_uuid, event_type, event_timestamp, get_uuid(subject_name), subject_name, get_uuid(object_name), object_name, "", "")
 
     elif event_type in LOG_TYPE.NET_OP:
-        subject_name = process_dict.get(subject_uuid)
+        subject_name = f"{subject_name_raw}_{subject_pid}"
         object_name = socket_dict.get(object_uuid)
 
         preparation_log = PreparationLog(host_uuid, event_uuid, 'network_send', event_timestamp, get_uuid(subject_name), subject_name, get_uuid(object_name), object_name, "", "")
@@ -194,7 +209,7 @@ if __name__ == '__main__':
                         print('Unknown log type: ', data['logType'])
                         continue
 
-            preparation_log_path = 'logs.jsonl'
+            preparation_log_path = 'system_logs.jsonl'
 
             with open(preparation_log_path, 'w') as f:
                 for log in preparation_logs:
@@ -210,7 +225,7 @@ if __name__ == '__main__':
     current_dir = os.path.dirname(os.path.abspath(__file__))
     
     agent_trace_file = os.path.join(current_dir, 'logs\\agent_trace.jsonl')
-    attack_file = os.path.join(current_dir, 'logs.jsonl')
+    attack_file = os.path.join(current_dir, 'system_logs.jsonl')
     merged_file = os.path.join(current_dir, 'merged_provenance.jsonl')
 
     merge_and_filter_logs(agent_trace_file, attack_file, merged_file)
