@@ -26,9 +26,12 @@ class AnomalyDetector:
         self.processed_event_count_value += 1
         
         current_time = time.time()
-        if self.processed_event_count_value % 10 == 0:
+        if self.processed_event_count_value % 500 == 0:
             self.info_print()
             self.last_print_time = current_time
+
+        if self.processed_event_count_value == 506:
+            print(associated_event)
 
         try:
             if self.is_node_tag_cached(associated_event.source_node):
@@ -51,7 +54,6 @@ class AnomalyDetector:
     def process_event(self, associated_event):
         self.init_tag(associated_event)
         self.propagate_tag(associated_event)
-        # self.degrade_tag(associated_event)
         return self.trigger_alert(associated_event)
 
     def init_tag(self, associated_event) -> None:
@@ -68,24 +70,20 @@ class AnomalyDetector:
             return
         else:
             source_tag = self.get_tag_cache(associated_event.source_node)
-
-            if associated_event.sink_node_tag is not None and associated_event.timestamp <= associated_event.sink_node_tag.timestamp:
-                return
             
             new_tag = source_tag.propagate(associated_event)
             
             AnomalyDetector.propogation_tag_count += 1
             
+            if associated_event.sink_node_tag is not None:
+                self.merge_tag(associated_event.sink_node_tag, new_tag)
+
             self.set_tag_cache(associated_event.sink_node, new_tag)
 
-    def degrade_tag(self, associated_event) -> None:
-        if self.get_tag_cache(associated_event.sink_node) is None:
-            return
 
-        sink_tag = self.get_tag_cache(associated_event.sink_node)
-        if sink_tag.should_attenuated():
-            self.remove_tag_cache(associated_event.sink_node)
-            AnomalyTagCache.attenuated_tag_count += 1
+    def merge_tag(self, old_tag: AnomalyTagCache, new_tag: AnomalyTagCache) -> AnomalyTagCache:
+        # 合并标签的逻辑，可以根据需要进行扩展
+        new_tag.merge(old_tag)
 
     def trigger_alert(self, associated_event) -> Optional[AnomalyTagCache]:
         if self.get_tag_cache(associated_event.sink_node) is None:
@@ -117,16 +115,9 @@ class AnomalyDetector:
         full_alert_json.append("AlertPath:\n")
         for event in tag.event_cache:
             full_alert_json.append(f"{event}\n")
-        full_alert_json.append(f"AlertType: {tag.alert_type}\n")
+        # full_alert_json.append(f"AlertType: {tag.alert_type}\n")
         full_alert_json.append('\n')
         return ''.join(full_alert_json)
-
-    # def load_permission_manager(self):
-    #     file_path = "anomaly_detection/permission.json"
-    #     data = {}
-    #     with open(file_path, 'r') as f:
-    #         data = json.load(f)
-    #     self.permission_manager = data
     
     def info_print(self):
         print(f"current Time: {time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())}")

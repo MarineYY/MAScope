@@ -1,7 +1,7 @@
 ###############Alert###############
-currentTime:1765162786479
+currentTime:1766983835828186112
 AlertPath:
-Event: [f6815990-1c39-52c5-ba00-cb1684f14cb0 UserAgent 2] -> agent_interaction -> [5481d629-0f0f-51b2-84f9-7e88c26eea60 CodeAgent 1], ts:1765162782220
-Event: [5481d629-0f0f-51b2-84f9-7e88c26eea60 CodeAgent 1] -> agent_interaction -> [bfb27a8b-0e6e-5665-834a-5d94c717ac0e ExecutorAgent 2], ts:1765162786479
-AlertType: UntrustedCodeExecution
+[uuid:33ff5760-6876-466f-ac4e-e8edcfd93793, agent:FileAgent] -> tool_invoke -> [uuid:33ff5760-6876-466f-ac4e-e8edcfd92793, process:msedgewebview2.exe], ts:1766983837842243584
+[uuid:33ff5760-6876-466f-ac4e-e8edcfd92793, process:msedgewebview2.exe] -> file_write -> [uuid:c0b46946-7b0e-44da-ac39-63bf4d6e8b83, file:C:\Users\\AppData\Local\io.github.clash-verge-rev.clash-verge-rev\EBWebView\Default\Cache\Cache_Data\f_006bbb], ts:1766983835828186112
+AlertType: None
 

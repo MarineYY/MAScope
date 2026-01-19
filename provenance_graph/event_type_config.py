@@ -6,4 +6,4 @@ class LOG_TYPE:
 
 class EVENT_TYPE:
         EVENT_OP = ['agent_invoke', 'agent_respond', 'file_read', 'file_write', 'file_delete', 'file_modify', 'process_load', 'process_start', 'process_end', 'network_send', 'network_receive']
-        Alert_TRIGER_RELATIONSHIP = ['file_write', 'file_delete', 'file_modify', 'network_send']
+        Alert_TRIGGER_RELATIONSHIP = ['file_read', 'file_write', 'file_delete', 'file_modify', 'process_load', 'network_send']

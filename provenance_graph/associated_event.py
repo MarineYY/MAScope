@@ -59,14 +59,14 @@ class AssociatedEvent:
     def set_event_uuid(self, event_uuid):
         self.event_uuid = event_uuid
 
-    def get_soure_node_name(self):
+    def get_source_node_name(self):
         return self.source_node.get_node_name()
     
     def get_sink_node_name(self):
         return self.sink_node.get_node_name()
 
     def __str__(self):
-        return f"{self.source_node} -> {self.relationship} -> {self.sink_node}, ts:{self.timestamp}"
+        return f"[{self.source_node}] -> {self.relationship} -> [{self.sink_node}], ts:{self.timestamp}"
     
     def preprocess_event(self):
         return f"{self.source_node.get_node_name()}, {self.relationship}, {self.sink_node.get_node_name()}"

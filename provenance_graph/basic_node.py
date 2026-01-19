@@ -35,22 +35,22 @@ class AgentNode(BasicNode):
 @dataclass
 class FileNode(BasicNode):
     node_uuid: Optional[str] = None
-    File_path: str = ""
+    file_path: str = ""
 
     def get_properties(self) -> Dict:
         props = super().get_properties()
         props.update({"uuid": self.node_uuid})
-        props.update({"File_path": self.File_path})
+        props.update({"file_path": self.file_path})
         return props
     
     def copy_node_generalize(self):
-        return self.__class__(self.node_uuid, self.File_path)
+        return self.__class__(self.node_uuid, self.file_path)
     
     def __str__(self):
-        return f"uuid:{self.node_uuid}, File_path:{self.File_path}"
+        return f"uuid:{self.node_uuid}, file:{self.file_path}"
     
     def get_node_name(self):
-        return self.File_path
+        return self.file_path
     
     def get_node_type(self):
         return "file"
@@ -97,7 +97,7 @@ class NetworkNode(BasicNode):
         return f"uuid:{self.node_uuid}, ip_address:{self.ip_address}"
     
     def get_node_name(self):
-        return self.ip_address.split(" : ")[0]
+        return self.ip_address
     
     def get_node_type(self):
         return "Network"
