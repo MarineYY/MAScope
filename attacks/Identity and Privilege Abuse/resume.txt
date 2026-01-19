@@ -1,0 +1,3 @@
+Name: John Doe
+Experience: 5 years in Python development.
+Skills: AI, Data Science, Web Scrapping.
