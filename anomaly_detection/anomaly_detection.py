@@ -46,7 +46,7 @@ class AnomalyDetector:
 
         if tag is not None:
             alert_json_string = self.alert_generation(tag)
-            with open(self.alert_path, "w") as writer:
+            with open(self.alert_path, "a") as writer:
                 print("!!! Anomaly Detected !!!")
                 print(alert_json_string)
                 writer.write(alert_json_string)

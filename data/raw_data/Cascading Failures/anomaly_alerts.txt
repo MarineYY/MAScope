@@ -1,0 +1,16 @@
+###############Alert###############
+currentTime:1768815287216504320
+AlertPath:
+[uuid:5657eb59-07b2-5aa7-8f38-ad7ffb233e61, agent:User] -> agent_invoke -> [uuid:bce0280a-0878-56b4-bf52-0be4da3cf88c, agent:PlanningAgent], ts:1768815267407971500
+[uuid:bce0280a-0878-56b4-bf52-0be4da3cf88c, agent:PlanningAgent] -> agent_invoke -> [uuid:71f22ba1-d115-551f-bf75-b9681fc9fd55, agent:EmailAgent], ts:1768815286164110600
+[uuid:71f22ba1-d115-551f-bf75-b9681fc9fd55, agent:EmailAgent] -> tool_invoke -> [uuid:89fb7e0e-3616-5dc0-bb36-7a9e57b8ab38, process:python.exe_18824], ts:1768815286222402000
+[uuid:89fb7e0e-3616-5dc0-bb36-7a9e57b8ab38, agent:python.exe_18824] -> network_send -> [uuid:79069a67-197f-50ca-8427-4e9578e98ea7, ip_address:183.47.101.192:6400], ts:1768815287216504320
+
+###############Alert###############
+currentTime:1768815287261699072
+AlertPath:
+[uuid:5657eb59-07b2-5aa7-8f38-ad7ffb233e61, agent:User] -> agent_invoke -> [uuid:bce0280a-0878-56b4-bf52-0be4da3cf88c, agent:PlanningAgent], ts:1768815267407971500
+[uuid:bce0280a-0878-56b4-bf52-0be4da3cf88c, agent:PlanningAgent] -> agent_invoke -> [uuid:71f22ba1-d115-551f-bf75-b9681fc9fd55, agent:EmailAgent], ts:1768815286164110600
+[uuid:71f22ba1-d115-551f-bf75-b9681fc9fd55, agent:EmailAgent] -> tool_invoke -> [uuid:89fb7e0e-3616-5dc0-bb36-7a9e57b8ab38, process:python.exe_18824], ts:1768815286222402000
+[uuid:89fb7e0e-3616-5dc0-bb36-7a9e57b8ab38, agent:python.exe_18824] -> network_send -> [uuid:79069a67-197f-50ca-8427-4e9578e98ea7, ip_address:183.47.101.192:6400], ts:1768815287261699072
+

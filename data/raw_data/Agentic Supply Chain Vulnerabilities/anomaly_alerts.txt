@@ -1,0 +1,23 @@
+###############Alert###############
+currentTime:1768972744101411584
+AlertPath:
+[uuid:5657eb59-07b2-5aa7-8f38-ad7ffb233e61, agent:User] -> agent_invoke -> [uuid:bce0280a-0878-56b4-bf52-0be4da3cf88c, agent:PlanningAgent], ts:1768972728055221700
+[uuid:bce0280a-0878-56b4-bf52-0be4da3cf88c, agent:PlanningAgent] -> agent_invoke -> [uuid:71f22ba1-d115-551f-bf75-b9681fc9fd55, agent:EmailAgent], ts:1768972743044152100
+[uuid:71f22ba1-d115-551f-bf75-b9681fc9fd55, agent:EmailAgent] -> tool_invoke -> [uuid:f51188ec-cace-5621-b0cf-58b546d472c8, process:python.exe_21464], ts:1768972743107711900
+[uuid:f51188ec-cace-5621-b0cf-58b546d472c8, agent:python.exe_21464] -> network_send -> [uuid:02b01c99-d946-56d9-9f28-43b6f22b9087, ip_address:183.47.120.204:6400], ts:1768972744101411584
+
+###############Alert###############
+currentTime:1768972744147595776
+AlertPath:
+[uuid:5657eb59-07b2-5aa7-8f38-ad7ffb233e61, agent:User] -> agent_invoke -> [uuid:bce0280a-0878-56b4-bf52-0be4da3cf88c, agent:PlanningAgent], ts:1768972728055221700
+[uuid:bce0280a-0878-56b4-bf52-0be4da3cf88c, agent:PlanningAgent] -> agent_invoke -> [uuid:71f22ba1-d115-551f-bf75-b9681fc9fd55, agent:EmailAgent], ts:1768972743044152100
+[uuid:71f22ba1-d115-551f-bf75-b9681fc9fd55, agent:EmailAgent] -> tool_invoke -> [uuid:f51188ec-cace-5621-b0cf-58b546d472c8, process:python.exe_21464], ts:1768972743107711900
+[uuid:f51188ec-cace-5621-b0cf-58b546d472c8, agent:python.exe_21464] -> network_send -> [uuid:02b01c99-d946-56d9-9f28-43b6f22b9087, ip_address:183.47.120.204:6400], ts:1768972744147595776
+
+###############Alert###############
+currentTime:1768972743107711900
+AlertPath:
+[uuid:5657eb59-07b2-5aa7-8f38-ad7ffb233e61, agent:User] -> agent_invoke -> [uuid:bce0280a-0878-56b4-bf52-0be4da3cf88c, agent:PlanningAgent], ts:1768972728055221700
+[uuid:bce0280a-0878-56b4-bf52-0be4da3cf88c, agent:PlanningAgent] -> agent_invoke -> [uuid:71f22ba1-d115-551f-bf75-b9681fc9fd55, agent:EmailAgent], ts:1768972743044152100
+[uuid:71f22ba1-d115-551f-bf75-b9681fc9fd55, agent:EmailAgent] -> tool_invoke -> [uuid:f51188ec-cace-5621-b0cf-58b546d472c8, process:python.exe_21464], ts:1768972743107711900
+
