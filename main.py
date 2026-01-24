@@ -82,7 +82,7 @@ class DataLoader:
 
     
 if __name__ == "__main__":
-    test_file = "/home/yangyangwei/LLM/MAScope/attack_data/attack_case3.jsonl" 
+    test_file = "/home/yangyangwei/LLM/MAScope/data/raw_data/Agent Goal Hijack/merged_provenance.jsonl" 
     data_loader = DataLoader(test_file)
     events = data_loader.load_events()
 

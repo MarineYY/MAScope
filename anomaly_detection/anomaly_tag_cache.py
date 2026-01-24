@@ -22,6 +22,7 @@ class AnomalyTagCache:
         self.ner_agent = NERAgent()
         self.alert_type = None
         self.accessed_agent_info = False
+        self.sensitive_entities_number = 0
     
     def propagate(self, event=None):
         new_tag = AnomalyTagCache(event)
@@ -32,6 +33,7 @@ class AnomalyTagCache:
             prompt = f"""事件：{event}\n 交互内容：{event.get_subject_context()}"""
             ner_result = self.ner_agent.NER_identification(prompt)
             new_tag.history = self.history + [f"[{event.source_node.get_node_type()}: {event.source_node.get_node_name()}] - {event.get_relationship()} -> [{event.sink_node.get_node_type()}: {event.sink_node.get_node_name()}]; interaction sensitive entity: {ner_result}"]
+            new_tag.sensitive_entities_number = len(json.loads(ner_result).get('entities', [])) + self.sensitive_entities_number
             print(event.get_subject_context())
             print(ner_result)
         else:
@@ -71,6 +73,8 @@ class AnomalyTagCache:
     def trigger_alert(self):
         return self
     
-    def should_replace_tag(self, new_tag) -> bool:
-        return new_tag.Propagation_Distance <= self.propagation_distance
+    def should_replace_tag(self, sink_tag) -> bool:
+        if sink_tag.sensitive_entities_number <= self.sensitive_entities_number:
+            return True
+        return False
 

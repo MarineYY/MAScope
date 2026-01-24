@@ -1,7 +1,8 @@
 ###############Alert###############
-currentTime:1766983835828186112
+currentTime:1768998551033391616
 AlertPath:
-[uuid:33ff5760-6876-466f-ac4e-e8edcfd93793, agent:FileAgent] -> tool_invoke -> [uuid:33ff5760-6876-466f-ac4e-e8edcfd92793, process:msedgewebview2.exe], ts:1766983837842243584
-[uuid:33ff5760-6876-466f-ac4e-e8edcfd92793, process:msedgewebview2.exe] -> file_write -> [uuid:c0b46946-7b0e-44da-ac39-63bf4d6e8b83, file:C:\Users\\AppData\Local\io.github.clash-verge-rev.clash-verge-rev\EBWebView\Default\Cache\Cache_Data\f_006bbb], ts:1766983835828186112
-AlertType: None
+[uuid:5657eb59-07b2-5aa7-8f38-ad7ffb233e61, agent:User] -> agent_invoke -> [uuid:bce0280a-0878-56b4-bf52-0be4da3cf88c, agent:PlanningAgent], ts:1768998529473858500
+[uuid:bce0280a-0878-56b4-bf52-0be4da3cf88c, agent:PlanningAgent] -> agent_invoke -> [uuid:71f22ba1-d115-551f-bf75-b9681fc9fd55, agent:EmailAgent], ts:1768998549946336000
+[uuid:71f22ba1-d115-551f-bf75-b9681fc9fd55, agent:EmailAgent] -> tool_invoke -> [uuid:9a50d90a-ddbd-5e03-bad2-9ec71bf2a003, process:python.exe_23764], ts:1768998550004441500
+[uuid:9a50d90a-ddbd-5e03-bad2-9ec71bf2a003, agent:python.exe_23764] -> network_send -> [uuid:02b01c99-d946-56d9-9f28-43b6f22b9087, ip_address:183.47.120.204:6400], ts:1768998551033391616
 
