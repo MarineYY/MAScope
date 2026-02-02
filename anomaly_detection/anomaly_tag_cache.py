@@ -73,8 +73,11 @@ class AnomalyTagCache:
     def trigger_alert(self):
         return self
     
-    def should_replace_tag(self, sink_tag) -> bool:
+    def should_replace_tag(self, sink_tag, associated_event) -> bool:
         if sink_tag.sensitive_entities_number <= self.sensitive_entities_number:
+            if associated_event.get_sink_node_name() == 'python.exe_14420':
+                print(f"new tag path : {self.history}, raw tag path : {sink_tag.history}")
+                # sys.exit(0)
             return True
         return False
 

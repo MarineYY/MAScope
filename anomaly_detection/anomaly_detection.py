@@ -30,7 +30,7 @@ class AnomalyDetector:
             self.info_print()
             self.last_print_time = current_time
 
-        if self.processed_event_count_value == 477:
+        if self.processed_event_count_value == 480:
             print(associated_event)
 
         try:
@@ -75,7 +75,7 @@ class AnomalyDetector:
             
             AnomalyDetector.propogation_tag_count += 1
             
-            if associated_event.sink_node_tag is not None and new_tag.should_replace_tag(associated_event.sink_node_tag):
+            if associated_event.sink_node_tag is not None and new_tag.should_replace_tag(associated_event.sink_node_tag, associated_event):
                 self.set_tag_cache(associated_event.sink_node, new_tag)
             elif associated_event.sink_node_tag is None:
                 self.set_tag_cache(associated_event.sink_node, new_tag)
