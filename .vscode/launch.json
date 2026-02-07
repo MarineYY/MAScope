@@ -11,7 +11,7 @@
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal",
-            "python": "/home/yangyangwei/miniconda3/envs/autogen/bin/python"
+            "python": "/home/marine/miniconda3/envs/autogen/bin/python"
         }
     ]
 }
