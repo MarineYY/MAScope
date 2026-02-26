@@ -4,7 +4,7 @@ AlertPath:
 [uuid:5657eb59-07b2-5aa7-8f38-ad7ffb233e61, agent:User] -> agent_invoke -> [uuid:bce0280a-0878-56b4-bf52-0be4da3cf88c, agent:PlanningAgent], ts:1768972937923279800
 [uuid:bce0280a-0878-56b4-bf52-0be4da3cf88c, agent:PlanningAgent] -> agent_invoke -> [uuid:ac4d341a-0fcc-5681-ab70-b7715df615e5, agent:RAGAgent], ts:1768972941704906700
 [uuid:ac4d341a-0fcc-5681-ab70-b7715df615e5, agent:RAGAgent] -> tool_invoke -> [uuid:b127fc17-7257-578c-936c-ea69968f9fb5, process:python.exe_19484], ts:1768972941704906700
-[uuid:b127fc17-7257-578c-936c-ea69968f9fb5, process:python.exe_19484] -> file_write -> [uuid:44faca57-a24e-5dd6-9c10-542aa079ac85, file:C:\Users\许逸杰\Desktop\MAScope\attacks\Memory and Context Poisoning\logs\agent_trace.jsonl], ts:1768972942716448256
+[uuid:b127fc17-7257-578c-936c-ea69968f9fb5, process:python.exe_19484] -> file_write -> [uuid:44faca57-a24e-5dd6-9c10-542aa079ac85, file:C:\Users\marine\Desktop\MAScope\attacks\Memory and Context Poisoning\logs\agent_trace.jsonl], ts:1768972942716448256
 
 ###############Alert###############
 currentTime:1768972941704906700
@@ -19,7 +19,7 @@ AlertPath:
 [uuid:5657eb59-07b2-5aa7-8f38-ad7ffb233e61, agent:User] -> agent_invoke -> [uuid:bce0280a-0878-56b4-bf52-0be4da3cf88c, agent:PlanningAgent], ts:1768972937923279800
 [uuid:bce0280a-0878-56b4-bf52-0be4da3cf88c, agent:PlanningAgent] -> agent_invoke -> [uuid:11c2a9ed-0b78-5592-b19c-006ac05f20c7, agent:CodingAgent], ts:1768972950464889000
 [uuid:11c2a9ed-0b78-5592-b19c-006ac05f20c7, agent:CodingAgent] -> tool_invoke -> [uuid:b127fc17-7257-578c-936c-ea69968f9fb5, process:python.exe_19484], ts:1768972961421136700
-[uuid:b127fc17-7257-578c-936c-ea69968f9fb5, process:python.exe_19484] -> file_write -> [uuid:8336547c-5582-5b96-a659-173f30d22338, file:C:\Users\许逸杰\Desktop\MAScope\attacks\Memory and Context Poisoning\generated_script.py], ts:1768972962434685696
+[uuid:b127fc17-7257-578c-936c-ea69968f9fb5, process:python.exe_19484] -> file_write -> [uuid:8336547c-5582-5b96-a659-173f30d22338, file:C:\Users\marine\Desktop\MAScope\attacks\Memory and Context Poisoning\generated_script.py], ts:1768972962434685696
 
 ###############Alert###############
 currentTime:1768972976502183680
